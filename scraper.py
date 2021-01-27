@@ -82,6 +82,25 @@ all_participants = client.get_participants(target_group, aggressive=True)
 print(gr+'[+] Saving In file...')
 time.sleep(1)
 
+with open("members.txt", "w", encoding='UTF-8') as f:
+    for user in all_participants:
+        if user.username:
+            username= user.username
+        else:
+            username= ""
+        if user.first_name:
+            first_name= user.first_name
+        else:
+            first_name= ""
+        if user.last_name:
+            last_name= user.last_name
+        else:
+            last_name= ""
+        name= (first_name + ' ' + last_name).strip()
+        if username is not "":
+            f.write(f"{name} @{username} ( {user.id} )\n")
+        else:
+            f.write(f"{name} ( {user.id} )\n")
 
 # Original output formatting: CSV and lots of info
 # with open("members.csv","w",encoding='UTF-8') as f:
